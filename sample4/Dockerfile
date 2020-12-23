@@ -1,5 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
+ENV ASPNETCORE_URLS=http://*:5000
 EXPOSE 80
 EXPOSE 443
 
@@ -14,5 +15,5 @@ RUN dotnet publish "Otus.Teaching.PromoCodeFactory.WebHost/Otus.Teaching.PromoCo
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=publish /app/publish ./
 CMD dotnet Otus.Teaching.PromoCodeFactory.WebHost.dll
